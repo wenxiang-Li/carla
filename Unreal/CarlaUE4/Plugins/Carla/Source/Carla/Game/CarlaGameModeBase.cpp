@@ -172,8 +172,8 @@ void ACarlaGameModeBase::BeginPlay()
   {
     RegisterEnvironmentObjects();
   }
-  
-  EnableCarSimChronoOverlapEvents();
+
+  EnableOverlapEvents();
 }
 
 void ACarlaGameModeBase::Tick(float DeltaSeconds)
@@ -265,15 +265,15 @@ void ACarlaGameModeBase::CheckForEmptyMeshes()
   
   for(AActor *Actor : WorldActors)
   {
-  	AStaticMeshActor *MeshActor = CastChecked<AStaticMeshActor>(Actor);
-  	if(MeshActor->GetStaticMeshComponent()->GetStaticMesh() == NULL)
-  	{
-  		UE_LOG(LogTemp, Error, TEXT("The object : %s has no mesh"), *MeshActor->GetFullName());
-  	}
+    AStaticMeshActor *MeshActor = CastChecked<AStaticMeshActor>(Actor);
+    if(MeshActor->GetStaticMeshComponent()->GetStaticMesh() == NULL)
+    {
+      UE_LOG(LogTemp, Error, TEXT("The object : %s has no mesh"), *MeshActor->GetFullName());
+    }
   }
 }
 
-void ACarlaGameModeBase::EnableCarSimChronoOverlapEvents()
+void ACarlaGameModeBase::EnableOverlapEvents()
 {
   TArray<AActor*> WorldActors;
   UGameplayStatics::GetAllActorsOfClass(GetWorld(), AStaticMeshActor::StaticClass(), WorldActors);
